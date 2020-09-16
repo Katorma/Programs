@@ -12,5 +12,5 @@ This assignment relies on the Coverage programs.
 ## Program 4
 This assignment relies on the Circles programs. 
 
-## Program 5
+## Lab 1
 Fork repository and add new project helloworld.
