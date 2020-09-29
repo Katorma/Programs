@@ -38,6 +38,7 @@ public class WebWorker implements Runnable
 	long filesize; 
 	byte[] buffer;
 	InputStream file;
+	String mType;
 		
 	/**
 	 * Constructor: must have a valid open socket
@@ -60,8 +61,8 @@ public class WebWorker implements Runnable
 			OutputStream os = socket.getOutputStream();)
 			{
 			readHTTPRequest(is,os);
-			writeHTTPHeader(os, "text/html");
-			writeContent(os);
+			writeHTTPHeader(os, mType);
+			writeImage(os);
 			os.flush();
 			socket.close();
 		}
@@ -94,21 +95,32 @@ public class WebWorker implements Runnable
 				   if(request.length > 1 && counter == 1){
 				       fname = request[1];
 				       fname = fname.substring(1);
-				       System.err.println(fname); 
-				   }			
-				System.err.println("Request line: (" + line + ")");
-				if (line.length() == 0)
-					break;
-			}
-			catch (Exception e)
-			{
-				System.err.println("Request error: " + e);
-				break;
-			}
-		}
+				       //puts the correct mime type for file extension
+				          if(fname.endsWith(".html"))
+					          mType = "text/html";
+					         else if(fname.endsWith(".gif"))
+					                  mType = "image/gif";
+					         else if(fname.endsWith(".jpg"))
+					                  mType = "image/jpeg";
+					         else if(fname.endsWith(".png"))
+					                  mType = "image/png";
+				            else if(fname.endsWith(".ico"))
+				                     mType = "image/ico"; 
+					         System.err.println(fname);
+					}
+				   
+				         System.err.println("Request line: ("+line+")");
+				         if (line.length()==0) break;
+				      } catch (Exception e) {
+				         System.err.println("Request error: "+e);
+				         break;
+				      }
+				   }		        
+
 		
 		
 		try{
+			if (mType == "text/html") {
 		      s = "";
 		      errorCode = 200;
 		      html = new BufferedReader(new FileReader(fname));
@@ -123,7 +135,17 @@ public class WebWorker implements Runnable
 		         if (l2.length()==0) 
 		         break;
 			   }
-		      }
+		}//end if
+			
+			
+			 else{
+			      errorCode = 200;
+			      file = new FileInputStream(fname);
+			      filesize = new File(fname).length();
+			      buffer = new byte[(int)filesize];         
+			    }		
+			
+	}//end try 
 		       catch (Exception e) {
                    errorCode = 404;
 		        } 			        
@@ -164,15 +186,22 @@ public class WebWorker implements Runnable
 	 * @param os
 	 *          is the OutputStream object to write to
 	 **/
-	private void writeContent(OutputStream os) throws Exception
-	{
-	      if(s != null && errorCode == 200)
+	
+	 private void writeImage(OutputStream os) throws Exception{
+           int a;
+	       if(s != null)
 	          os.write(s.getBytes());
 
-	      else if(errorCode == 404){
+	       else if(mType == "image/jpeg" || mType == "image/gif" || 
+	               mType == "image/png" || mType == "image/ico")
+	 	            while((a=file.read(buffer))>0)
+	                os.write(buffer,0,a);
+	     
+	       if(errorCode == 404){
 	          os.write("<html><head></head><body>\n".getBytes());
 	          os.write("<h3>404: Error Page not Found!</h3>\n".getBytes());
 	          os.write("</body></html>\n".getBytes());
 	         }
-	}
+
+	     }	
 } // end class

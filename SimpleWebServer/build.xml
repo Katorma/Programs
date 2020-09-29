@@ -8,22 +8,30 @@
                    
      katorma                                                                
      ====================================================================== -->
-<project name="WebServer" default="run" basedir=".">
-	
+	  
+	<project name="SimpleWebServer" default="run" basedir=".">
+	<description>
+		Buildfile to compile and run SimpleWebServer program
+	</description>
 	<property name="src" location="src/"/>
-	<property name="build" location="bin/"/>
-	
+	<property name="bin" location="bin/"/>
+
+	<!-- Delete bin -->
 	<target name="clean">
-		<delete dir="build"/>
+		<delete dir="${bin}"/>
 	</target>
-	
-	<target name="compile" depends="clean">
-		<mkdir dir="build"/>
-		<javac srcdir="src" destdir="build"/>
+
+	<!-- compile webserver -->
+	<target name="compile">
+		<mkdir dir="${bin}"/>
+		<javac srcdir="${src}" destdir="${bin}"/>
 	</target>
-	
-	<target name="run" depends="compile">
-		<java classname="edu.nmsu.cs.webserver.WebServer" classpath="build"/>
+
+	<!-- compile and clean -->
+	<target name="compileClean" depends="clean, compile"/>
+
+	<!-- run the webserver -->
+	<target name="run" depends="compileClean">
+		<java classname="edu.nmsu.cs.webserver.WebServer" classpath="${bin}" dir="../www" fork="true"/>
 	</target>
-	
-</project>
+	</project>
