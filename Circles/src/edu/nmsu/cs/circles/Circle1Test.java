@@ -42,7 +42,6 @@ public class Circle1Test
 	public void simpleMove()
 	{
 		Point p;
-		System.out.println("Running test simpleMove.");
 		p = circle1.moveBy(1, 1);
 		Assert.assertTrue(p.x == 2 && p.y == 3);
 	}
@@ -54,7 +53,6 @@ public class Circle1Test
 	public void simpleMoveNeg()
 	{
 		Point p;
-		System.out.println("Running test simpleMoveNeg.");
 		p = circle1.moveBy(-1, -1);
 		Assert.assertTrue(p.x == 0 && p.y == 1);
 	}
