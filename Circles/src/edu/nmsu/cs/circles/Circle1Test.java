@@ -74,14 +74,14 @@ public class Circle1Test
     @Test //testing circles with some intersection
     public void intersectTest(){
         Circle1 c = new Circle1(4, 2, 4);
-        boolean test = circle1.intersects(c);
-        Assert.assertTrue(run2);
+        boolean t = circle1.intersects(c);
+        Assert.assertTrue(t);
     }
     
     @Test //testing circles with no intersection
     public void noIntersectTest(){
         Circle1 c = new Circle1(50, 50, 40);
-        boolean test = circle1.intersects(c);
-        Assert.assertFalse(run2);
+        boolean t = circle1.intersects(c);
+        Assert.assertFalse(t);
     }
 }

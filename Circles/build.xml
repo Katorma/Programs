@@ -3,7 +3,7 @@
      katorma                                                                
      ====================================================================== -->
 	  
-<project name = "Circles" default = "run2" basedir=".">
+<project name = "Circles" default = "test" basedir=".">
 	
     <!--JUnit Path-->
     <path id = "junitpath">
@@ -45,8 +45,8 @@
         </java>
     </target>
 	
-    <!-- run2, actually runs Circle1 and Circle2 -->
-    <target name = "run2" depends = "runCircle1, runCircle2">
+    <!-- actually runs Circle1 and Circle2 -->
+    <target name = "test" depends = "runCircle1, runCircle2">
     </target>
 	
     <!-- Run and Report Circle1 -->

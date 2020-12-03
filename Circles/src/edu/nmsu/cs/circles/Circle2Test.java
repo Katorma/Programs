@@ -36,15 +36,15 @@ public class Circle2Test {
     @Test //testing circles with some intersection
     public void intersectTest(){
         Circle2 c = new Circle2(4, 2, 4);
-        boolean test = circle.intersects(c);
-        Assert.assertTrue(run2);
+        boolean t = circle.intersects(c);
+        Assert.assertTrue(t);
     }
     
     @Test //testing circles with no intersection
     public void noIntersectTest(){
         Circle2 c = new Circle2(50, 50, 40);
-        boolean test = circle.intersects(c);
-        Assert.assertFalse(run2);
+        boolean t = circle.intersects(c);
+        Assert.assertFalse(t);
     }
     
     @Test //scale up the radius
