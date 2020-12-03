@@ -22,17 +22,7 @@ public class Circle1Test
 	@Before
 	public void setup()
 	{
-		System.out.println("\nTest starting...");
 		circle1 = new Circle1(1, 2, 3);
-	}
-
-	//
-	// Stuff you want to do after each test case
-	//
-	@After
-	public void teardown()
-	{
-		System.out.println("\nTest finished.");
 	}
 
 	//
