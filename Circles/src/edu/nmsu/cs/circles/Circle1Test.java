@@ -58,11 +58,30 @@ public class Circle1Test
 		p = circle1.moveBy(-1, -1);
 		Assert.assertTrue(p.x == 0 && p.y == 1);
 	}
+	
+    @Test //scale up the radius
+    public void scaleUp(){
+        circle1.scale(5);
+        Assert.assertTrue(circle1.radius == 5);
+    }
+    @Test //scale down the radius
+    public void scaleDown(){
+        circle1.scale(0.3);
+        Assert.assertTrue(circle1.radius == 0.3);
 
-	/***
-	 * NOT USED public static void main(String args[]) { try { org.junit.runner.JUnitCore.runClasses(
-	 * java.lang.Class.forName("Circle1Test")); } catch (Exception e) { System.out.println("Exception:
-	 * " + e); } }
-	 ***/
-
+}
+    
+    @Test //testing circles with some intersection
+    public void intersectTest(){
+        Circle1 c = new Circle1(4, 2, 4);
+        boolean test = circle1.intersects(c);
+        Assert.assertTrue(run2);
+    }
+    
+    @Test //testing circles with no intersection
+    public void noIntersectTest(){
+        Circle1 c = new Circle1(50, 50, 40);
+        boolean test = circle1.intersects(c);
+        Assert.assertFalse(run2);
+    }
 }
