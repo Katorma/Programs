@@ -5,6 +5,12 @@
 	  
 <project name = "Circles" default = "test" basedir=".">
 	
+    <!-- Directories -->
+    <property name = "src.dir" location = "src/"/>
+    <property name = "build.dir" location = "bin/" />
+    <property name = "lib.dir" location = "lib/" />
+    <property name = "report.dir" location = "report/"/>
+	
     <!--JUnit Path-->
     <path id = "junitpath">
         <fileset dir="${lib.dir}">
@@ -12,12 +18,6 @@
         </fileset>
         <pathelement location = "${build.dir}"/>
     </path>
-	
-	<!-- Directories -->
-    <property name = "src.dir" location = "src/"/>
-    <property name = "build.dir" location = "bin/" />
-    <property name = "lib.dir" location = "lib/" />
-    <property name = "report.dir" location = "report/"/>
 
     <!-- Clean -->
     <target name = "clean" >
